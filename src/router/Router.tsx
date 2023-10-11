@@ -6,14 +6,14 @@ import { Error404 } from "../components/errors/Err404";
 import Login from "../components/Login";
 
 export const Router = () => {
-  const token: string = useSelector((state: any) => state.userLog.token);
+  const logged: boolean = useSelector((state: any) => state.userLog.loggedIn);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/users" element={token != "" ? <Logout /> : <Login />} />
+        <Route path="/users" element={logged ? <Logout /> : <Login />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

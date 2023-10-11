@@ -40,7 +40,6 @@ const defaultTheme = createTheme();
 
 export default function Logout() {
   const [loading, setLoading] = useState<boolean>(true);
-  const [count, setCount] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -62,23 +61,7 @@ export default function Logout() {
       .then((response) => response.json())
       .then((json) => {
         dispatch(addData(json));
-        setCount(data.total_pages);
-        setTimeout(() => setLoading(false), 1000);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    const url: string = `https://reqres.in/api/users?page=${page}`;
-    setLoading(true);
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch(addData(json));
-        setCount(data.total_pages);
-        setTimeout(() => setLoading(false), 500);
+        setTimeout(() => setLoading(false), 100);
       })
       .catch((err) => {
         console.log(err);
@@ -153,26 +136,26 @@ export default function Logout() {
                   </Card>
                 </Grid>
               ))}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "50px",
+                }}
+              >
+                <Pagination
+                  variant="outlined"
+                  color="primary"
+                  count={data.total_pages}
+                  page={page}
+                  onChange={handleChange}
+                  sx={{ mb: 3 }}
+                  size="large"
+                />
+              </Box>
             </Grid>
           )}
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "50px",
-            }}
-          >
-            <Pagination
-              variant="outlined"
-              color="primary"
-              count={count}
-              page={page}
-              onChange={handleChange}
-              sx={{ mb: 3 }}
-              size="large"
-            />
-          </Box>
         </Container>
       </main>
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
