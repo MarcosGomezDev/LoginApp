@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Data } from "../../Types/dataType";
+import { Data } from "../../types/dataType";
 
 const initialState: Data = {
   page: 0,

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LoginUser } from "../../Types/loginType";
+import { LoginUser } from "../../types/loginType";
 
 const initialState: LoginUser = {
   token: "",

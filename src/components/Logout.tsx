@@ -16,10 +16,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/data/userSlice";
-import { User } from "../Types/userType";
+import { User } from "../types/userType";
 import { useEffect, useState } from "react";
 import { addData } from "../redux/data/dataSlice";
-import { Data } from "../Types/dataType";
+import { Data } from "../types/dataType";
 import Pagination from "@mui/material/Pagination";
 import { CircularProgress } from "@mui/material";
 
