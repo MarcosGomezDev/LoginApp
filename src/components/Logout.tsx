@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { addData } from "../redux/data/dataSlice";
 import { Data } from "../types/dataType";
 import Pagination from "@mui/material/Pagination";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 
 function Copyright() {
   return (
@@ -41,6 +41,7 @@ const defaultTheme = createTheme();
 export default function Logout() {
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const data: Data = useSelector((state: any) => state.data);
@@ -68,11 +69,34 @@ export default function Logout() {
       });
   }, [page]);
 
+  const searcher = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setSearch(e.target.value);
+  };
+
+  const results = !search
+    ? data.data
+    : data.data.filter((user: User) =>
+        user.first_name.toLowerCase().includes(search.toLocaleLowerCase())
+      );
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <AppBar position="relative">
-        <Toolbar></Toolbar>
+        <Toolbar>
+          <TextField
+            margin="normal"
+            fullWidth
+            id="search"
+            label="Search"
+            name="search"
+            autoComplete="search"
+            value={search}
+            onChange={searcher}
+          />
+        </Toolbar>
       </AppBar>
       <main>
         <Box
@@ -111,7 +135,7 @@ export default function Logout() {
             </Box>
           ) : (
             <Grid container spacing={4}>
-              {data?.data?.map((user: User) => (
+              {results.map((user: User) => (
                 <Grid item key={user.id} xs={12} sm={6} md={4}>
                   <Card
                     sx={{
