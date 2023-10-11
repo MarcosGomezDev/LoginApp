@@ -88,11 +88,11 @@ export default function Logout() {
         <Toolbar>
           <TextField
             margin="normal"
-            fullWidth
-            id="search"
+            id="outlined-basic"
             label="Search"
             name="search"
             autoComplete="search"
+            color="secondary"
             value={search}
             onChange={searcher}
           />
